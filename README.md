@@ -26,5 +26,3 @@ On PC all Browser work.
 For the display it is necessary to import the SSD1306Wire library. You can find it in the Arduino Library Manager, where it is called `ESP8266_and_ESP32_OLED_driver_for_SSD1306_displays`. 
 
 The Async Web Server is implemented as well by just importing `ESPAsyncWebServer` and `AsyncTCP` in the Library manager. 
-
----
