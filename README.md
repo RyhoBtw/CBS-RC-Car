@@ -2,7 +2,7 @@
 
 A Repository for documenting the build of a simple rc car using the ESP32 WROOM 30-pin
 
-![[circuit.svg]]
+![circuit](https://github.com/RyhoBtw/CBS-RC-Car/blob/main/circuit.svg)
 
 The Motor Controller (H-Bridge) takes 5V as an input so we need level shifter to shift the 3.3V Output from the ESP32 up to 5V. 
 
