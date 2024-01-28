@@ -20,7 +20,7 @@ For now the speed and direction values ranges from 0 to 200 due to power limitat
 For some reason Google Chrome often does not handle the CSS for the vertical slider correctly,  Firefox, Opera and Safari worked as expected.
 On PC all Browser work. 
 
----
+
 ## Libraries
 
 For the display it is necessary to import the SSD1306Wire library. You can find it in the Arduino Library Manager, where it is called `ESP8266_and_ESP32_OLED_driver_for_SSD1306_displays`. 
