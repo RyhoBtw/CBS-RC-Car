@@ -155,7 +155,6 @@ const char index_html[] PROGMEM = R"rawliteral(
      <input id="range2" name="range2" type="range" min="0" max="200" orient="horizontal" value="100" step="20" list="markers1" oninput="setValue(this);">
      <br>
      <div id="rangeValue2">stop</div>
-     <div id="dataValues">dataValues</div>
      <br><br>
 
      <label for="rangeLabel1">links / rechts</label><br/>
@@ -181,11 +180,12 @@ const char index_html[] PROGMEM = R"rawliteral(
 String ipAdress = "none";
 int speedValue = 100;     // = off
 int directionValue = 100; // = middle / straight
-int maxSpeed = 180;
+int maxSpeed = 170;
 int maxCurveSpeed = 54;
-int spinnerSpeed = maxSpeed * 0.8; // car rotates around its axis - left or right
+int spinnerSpeed = maxSpeed; // car rotates around its axis - left or right
 int minValuePWM = 100; //at a PWM of 20% or 40% of 255, the car does not start to move (just some motor sound) => correction as minimal value
-int correctionLeftMotorPWM = 14; //the rigth motor is somewhat faster, thus the speed_ is slightly reduced for driving straight ahead
+int correctionLeftMotorPWM = 10; //the rigth motor is somewhat faster, thus the speed_ is slightly reduced for driving straight ahead
+int correctionRightMotorCurvePWM = 30;
 
 int internalBlueLED = 2;
 
@@ -294,7 +294,6 @@ void checkWifiConnection(){
     delay(500);
     setValuesMotors(LOW, LOW, LOW, LOW);
     
-
     String ssidString = ssid;
     String pwString = password;
     String text [4] = {ssidString, pwString, "Connecting to WiFi......","Reboot ESP32?"}; 
@@ -364,10 +363,12 @@ void setNewSpeed(){
 
 String setDirectionPWM(int totalSpeed_m1, int totalSpeed_m2){
         String displayDirection = "geradeaus";
+
+        Serial.println(directionValue);
   
         if(directionValue > 100){  //move to the right
           int pwmSpeedAdditionRight = getPWMValueDirection(directionValue - 100, maxCurveSpeed);      
-          totalSpeed_m2 = totalSpeed_m2 + pwmSpeedAdditionRight; 
+          totalSpeed_m2 = totalSpeed_m2 + pwmSpeedAdditionRight + correctionRightMotorCurvePWM; 
           displayDirection = "rechts "+String(directionValue - 100)+" %";
         }else if(directionValue < 100){ //move to the left 
           int pwmSpeedAdditionLeft = getPWMValueDirection(100 - directionValue, maxCurveSpeed);
