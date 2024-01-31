@@ -6,7 +6,7 @@ A Repository for documenting the build of a simple rc car using the ESP32 WROOM 
 
 The Motor Controller (H-Bridge) takes 5V as an input so we need level shifter to shift the 3.3V Output from the ESP32 up to 5V. 
 
-Also we found out that we need at least one capacitor on the ESP32 Power supply to voltage drops when the car starts moving.
+2 capacitors were added for voltage stabilization. Resistors were added as well to the output of the Microcontroller, to pull down the electric potential so that no faulty inputs accrue.
 
 The Internal LED showes if the ESP is connected to a accsses point.
 -> stays on if connected otherwise it blinks 
